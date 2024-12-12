@@ -11,6 +11,10 @@ datagroup: gowri_1_default_datagroup {
 
 persist_with: gowri_1_default_datagroup
 
+access_grant: users_test1 {
+user_attribute: users_test
+allowed_values: [ "users" ]
+}
 explore: inventory_items_vijaya {
   join: products {
     type: left_outer
@@ -30,6 +34,7 @@ explore: orders {
 }
 
 explore: order_items {
+  required_access_grants: [users_test1]
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
